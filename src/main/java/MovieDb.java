@@ -1,3 +1,7 @@
+/**
+ * Connection to movie database:
+ * http://docs.themoviedb.apiary.io/
+ */
 class MovieDb {
     static void getMovies() throws Exception {
         // GEThttp://api.themoviedb.org/3/discover/movie
