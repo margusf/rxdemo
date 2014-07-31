@@ -23,3 +23,10 @@ dependencies {
 
 sourceSets.main.compileClasspath += configurations.provided
 sourceSets.test.compileClasspath += configurations.provided
+
+task runHello(type: JavaExec) {
+//    jvmArgs '-Dlogback.configurationFile=src/test/logback-batchsigner.xml'
+
+    main = 'rxdemo.Hello'
+    classpath = sourceSets.main.runtimeClasspath
+}

@@ -1,3 +1,5 @@
+package rxdemo;
+
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
@@ -12,7 +14,7 @@ import lombok.ToString;
 public class MovieDb {
     private static final Gson GSON = new Gson();
 
-    static MovieInfo[] getMovies() throws Exception {
+    public static MovieInfo[] getMovies() throws Exception {
         // GEThttp://api.themoviedb.org/3/discover/movie
         String json = HttpHelper.doGet(
                 "http://api.themoviedb.org/3/discover/movie?api_key=0835385142505861236af08685de3c1f");
@@ -22,7 +24,7 @@ public class MovieDb {
         return response.getResults();
     }
 
-    static ActorInfo[] getCast(MovieInfo movie) throws Exception {
+    public static ActorInfo[] getCast(MovieInfo movie) throws Exception {
         String json = HttpHelper.doGet(
                         "http://api.themoviedb.org/3/movie/" + movie.getId()
                                 + "/credits?api_key=0835385142505861236af08685de3c1f");
@@ -30,7 +32,7 @@ public class MovieDb {
         return response.getCast();
     }
 
-    static ActorDetails getActorDetails(ActorInfo actor) throws Exception {
+    public static ActorDetails getActorDetails(ActorInfo actor) throws Exception {
         String json = HttpHelper.doGet(
                         "http://api.themoviedb.org/3/person/" + actor.getId()
                                 + "?api_key=0835385142505861236af08685de3c1f");
@@ -39,7 +41,7 @@ public class MovieDb {
     }
 
     @Data
-    static class MovieInfo {
+    public static class MovieInfo {
         private int id;
         private String title;
         @SerializedName("release_date")
@@ -47,23 +49,23 @@ public class MovieDb {
     }
 
     @Data
-    static class DiscoverResponse {
+    public static class DiscoverResponse {
         private MovieInfo[] results;
     }
 
     @Data
-    static class CastResponse {
+    public static class CastResponse {
         private ActorInfo[] cast;
     }
 
     @Data
-    static class ActorInfo {
+    public static class ActorInfo {
         private int id;
         private String name;
     }
 
     @ToString(callSuper=true)
-    static class ActorDetails extends ActorInfo {
+    public static class ActorDetails extends ActorInfo {
         @Getter @Setter private String birthday;
     }
 }
